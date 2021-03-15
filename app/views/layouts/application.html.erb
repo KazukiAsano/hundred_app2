@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HundredApp2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-color">
+      <a href="/" >
+        <span class="navbar-brand mb-0 header">
+          <span class="en">¥</span>100!!!!
+        </span>
+      </a>
+      <ul class="navbar-nav">
+        <% if user_signed_in? %>
+        <li class="navbar-item text-right"><%= link_to "レビュー投稿", edit_user_registration_path %></li>
+        <li class="navbar-item text-right"><%= link_to "レビュー閲覧", edit_user_registration_path %></li>
+        <li class="navbar-item text-right"><%= link_to "ランキング", edit_user_registration_path %></li>
+        <li class="navbar-item text-right"><%= link_to "ショップ検索", edit_user_registration_path %></li>
+        
+        <li class="nav-item dropdown text-right">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            マイページ
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "アカウント編集", edit_user_registration_path ,class:"dropdown-item"%>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトしますか？" } ,class:"dropdown-item"%>
+          <div>
+        </li>
+        <% else %>
+          <li class="navbar-item text-right"><%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post %></li>
+          <li class="navbar-item text-right"><%= link_to "ログイン", new_user_session_path %></li>
+          <li class="navbar-item text-right"><%= link_to "アカウント登録", new_user_registration_path%></li>
+        <% end %>
+      </ul>
+    </nav>
+  </header>
+  <% flash.each do |flash_type, msg| %>
+    <div class="alert alert-<%= flash_type %>" role="alert">
+      <%= msg %>
+    </div>
+  <% end %>
+    <%= yield %>   
+  <footer class="fixed-bottom">
+    <nav class="navbar navbar-dark bg-color">
+      <span class="navbar-brand footer">Copyright  kazuki asano, 2020 All Rights Reserved.</span>
+    </nav>
+  </footer>
+  </body>
+</html>
