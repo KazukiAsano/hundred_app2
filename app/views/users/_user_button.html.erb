@@ -1,0 +1,5 @@
+<% if current_page?(path) %>
+  <%= link_to head,path,class:"btn btn-secondary col-3" %>
+<% else %>
+  <%= link_to head,path,class:"btn btn-outline-dark col-3" %>
+<% end %>

@@ -1,0 +1,99 @@
+<% last_rate = 0 %>
+<% j = 1 %>
+<h4 class="text-center mb-4"><i class="fas fa-crown mr-2" style="color: gold;"></i>ランキング</h4>
+<% @ranks.first(5).each.with_index(1) do |post,i|%>
+  <% if post.reviews.average(:rate).to_f.round(1) != last_rate %>
+    <% j = i %>
+    <div class="mx-auto my-3" style="width: 80%; border: 1px solid #dadce0; border-radius: 0.3rem;">
+      <%= link_to post do%>
+        <div class="row px-3">
+          <div class="col-1 border-right py-5 text-dark" style="writing-mode: vertical-rl; text-orientation: upright;">
+            <span class="font-weight-bold"><%=j%></span> 位
+          </div>
+          <%= image_tag post.image.url, class:"mr-5 col-4 my-3", style:"height: 150px; object-fit: cover;"%>
+          <div class="col-6 text-dark py-3">
+            <h4 class="my-2"><%= post.name%></h4>
+            <div class="mb-3" style="opacity: 0.5;">
+              <%if post.user.name?%>
+                投稿者: <%= post.user.name%>さん
+              <%else%>
+                投稿者: 名無しさん
+              <%end%>
+            </div>
+            <h4>
+              <span id="star-rate<%=post.id%>" class="mr-2"></span>
+              (<%= post.reviews.count%>)
+            </h4>
+          </div>
+        </div>
+      <%end%>
+    </div>
+    <% last_rate = post.reviews.average(:rate).to_f.round(1) %>
+  <% elsif i == 1 %>
+    <% last_rate = post.reviews.average(:rate).to_f.round(1) %>
+  <% else %>
+    <div class="mx-auto my-3" style="width: 80%; border: 1px solid #dadce0; border-radius: 0.3rem;">
+      <%= link_to post do%>
+        <div class="row px-3">
+          <div class="col-1 border-right py-5 text-dark" style="writing-mode: vertical-rl; text-orientation: upright;">
+            <span class="font-weight-bold"><%=j%></span> 位
+          </div>
+          <%= image_tag post.image.url, class:"mr-5 col-4 my-3", style:"height: 150px; object-fit: cover;"%>
+          <div class="col-6 text-dark py-3">
+            <h4 class="my-2"><%= post.name%></h4>
+            <div class="mb-3" style="opacity: 0.5;">
+              <%if post.user.name?%>
+                投稿者: <%= post.user.name%>さん
+              <%else%>
+                投稿者: 名無しさん
+              <%end%>
+            </div>
+            <h4>
+              <span id="star-rate<%=post.id%>" class="mr-2"></span>
+              (<%= post.reviews.count%>)
+            </h4>
+          </div>
+        </div>
+      <%end%>
+    </div>
+    <% last_rate = post.reviews.average(:rate).to_f.round(1) %>
+  <% end %>
+  <%# <div class="mx-auto" style="width: 80%; border: 1px solid #dadce0; border-radius: 0.3rem;">
+    <%= link_to post do%>
+      <%# <div class="row px-3">
+      <div class="col-1 border-right py-5 text-dark" style="writing-mode: vertical-rl; text-orientation: upright;">
+      <%# <%=i%> 
+      <%# </div>
+        <%= image_tag post.image.url, class:"mr-5 col-4 my-3", style:"height: 150px; object-fit: cover;"%>
+        <%# <div class="col-6 text-dark py-3">
+          <h4 class="my-2"><%= post.name</h4>
+          <div class="mb-3" style="opacity: 0.5;">  
+    <%if post.user.name?%> 
+      <%# 投稿者: <%= post.user.name%>
+    <%# <%else%>
+      <%# 投稿者: 名無しさん
+    <%end%> 
+  <%# </div>
+  <h4> %> 
+    <%# <span id="star-rate<%=post.id" class="mr-2"></span> %>
+  
+  <%# (<%= post.reviews.count)</h4> %>
+          <%# </div> %>
+          <%# </div> %>
+          <%# <%end%> 
+          <%# </div>  %>
+  <script>
+  $('#star-rate<%= post.id %>').empty();
+  $('#star-rate<%= post.id%>').raty({
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf:  '<%= asset_path('star-half.png') %>',
+    half      : true,
+    readOnly: true,
+    score: <%= post.reviews.average(:rate).to_f.round(1) %>,
+  });
+  </script>
+<%end%>
+
+

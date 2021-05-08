@@ -4,9 +4,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :posts, dependent: :destroy
+  has_many :shoppings, dependent: :destroy
+  has_many :reviews, dependent: :destroy
+
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
     end
   end
+
+  mount_uploader :user_image, ImageUploader
 end

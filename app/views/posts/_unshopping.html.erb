@@ -1,0 +1,3 @@
+<%= link_to "/favorites/#{@post.id}/destroy", method: :post, class: 'like', remote: true do %>
+  <div class="unfavorite">カートにすでに入っています</div>
+<% end %>

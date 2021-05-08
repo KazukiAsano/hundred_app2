@@ -1,0 +1,42 @@
+<h2 class="text-center mt-3 mb-4">口コミ編集</h2>
+
+<%= form_with model: @review,local: true do |f| %>
+<table class="table table-bordered my-3">
+  <tbody>
+    <tr>
+      <th scope="row"><%= f.label :title, "タイトル"%></th>
+      <td><%= f.text_field :title, style:"width:100% ;"%></td>
+    </tr>
+    <tr>
+      <th scope="row"><%= f.label :shop_name, "購入店舗名"%></th>
+      <td><%= f.text_field :shop_name, placeholder:"例：ダイソー：東京小平店", style:"width:100% ;"%></td>
+    </tr>
+    <tr>
+      <th scope="row"><%= f.label :rate, "評価"%></th>
+      <td id="star"><%= f.hidden_field :rate, id: :review_star%></td>
+    </tr>
+    <tr>
+      <th scope="row"><%= f.label :comment, "コメント"%></th>
+      <td><%= f.text_area :comment, placeholder:"例：iphone11pro用の保護ガラスです。ブルーライトカットのverもありますが、無色の方が好みなのでこちらにしました。100円ショップのアクセサリーは大丈夫なの？と思ってましたが、知人に薦められ購入してみました。使ってビックリ！家電量販店などにある倍以上の値段のものと遜色ない使い勝手でした！何度か落としたりしてしまいましたが、今のところ全然問題ないです。最初の頃の自分のように疑っている方がいましたら、是非物は試しで使ってみていただきたいです！", style:"width: 100%; height: 200px;"%></td>
+    </tr>
+  </tbody>
+</table>
+<div style="text-align: center; margin: 3rem 0;">
+  <%= f.submit "送信", class:"btn submit_btn mb-5" ,style:"width:80%;"%>
+</div>
+
+<!-- 評価javascript -->
+  <script>
+  $('#star').raty({
+    score : 1,
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf:  '<%= asset_path('star-half.png') %>',
+    scoreName: 'review[rate]',
+    half: true,
+  });
+  </script>  
+
+<% end %>
+

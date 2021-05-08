@@ -1,0 +1,101 @@
+<hr/>
+<div class="row px-5">
+  <div class="col-8">
+    <div style="display: inline; border:1px solid; padding: 0.2rem;">
+      <%=@post.genre%>
+    </div>
+    <h4 class="my-2"><%=@post.name%></h4>
+    <div class="mb-2">
+      <span id="star-rate<%=@post.id%>" class="mr-2"></span>
+      <span class="align-middle" style="font-size: 1.3rem;"><%=@post.rate%></span>
+    </div>
+    <div class="post_index_icon">
+      <span class="mr-2"><i class="fas fa-shopping-cart mr-2"></i><%=@post.shoppings.count%>件</span>
+      <span class="ml-3"><i class="fas fa-comments mr-2"></i><%=@post.reviews.count%>件</span>
+    </div>
+    <div class="mt-2" style="opacity: 0.5;">
+      <%if @post.user.name?%>
+        投稿者: <%= @post.user.name%>さん
+      <%else%>
+        投稿者: 名無しさん
+      <%end%>
+    </div>
+  </div>
+  <div class="col-4 text-center">
+    <%= render 'shoppings/shopping' %>
+    <%if @post.user_id!=current_user.id%>
+      <%if Review.exists?(user: current_user, post_id: @post.id)%>
+        <div class="comment_done mt-4 mx-auto">
+          <i class="fas fa-comments mr-1"></i>口コミ投稿済
+        </div>
+      <%else%>
+        <%= link_to new_post_reviews_path(@post) do%>
+          <div class="btn comment_button text-decoration-none mt-4">
+            <i class="fas fa-comments mr-1"></i>口コミ投稿
+          </div>
+        <%end%>
+      <%end%>
+    <%end%>
+    <%if @post.user_id==current_user.id%>
+      <%= link_to edit_post_path(@post) do%>
+        <div class="btn post_edit_button mt-4">
+            投稿編集
+        </div>
+      <%end%>
+      <%= link_to post_path(@post), method: :delete, data: { confirm: '削除してよろしいですか?' } do%>
+        <div class="btn post_delete_button mt-4">
+          投稿削除
+        </div>
+      <%end%>
+    <%end%>
+  </div>
+</div>
+<hr/>
+<div class="container-fluid mx-auto mt-3">
+  <div class="row">
+    <%= render partial: 'post_button', locals: { head:"投稿", path: post_path}%>
+    <%= render partial: 'post_button', locals: { head:"口コミ", path: reviews_post_path}%>
+    <%= render partial: 'post_button', locals: { head:"レビュー閲覧に戻る", path: posts_path}%>
+  </div>
+</div>
+
+<div class="text-center my-5">
+  <%= image_tag @post.image.url, class:"mx-4 col-6", style:"height: 300px; object-fit: cover;"%>
+</div>
+
+<table class="table">
+  <tbody>
+    <tr>
+      <th scope="row" style="width: 20%; background-color: #F3D693;">購入店舗名</th>
+      <td><%= @post.shop_name%></td>
+    </tr>
+    <tr>
+      <th scope="row" style="width: 20%; background-color: #F3D693;">購入回数</th>
+      <td>
+        <%if @post.purchase_num%>
+          初めて
+        <%else%>
+          2回以上
+        <%end%>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row" style="width: 20%; background-color: #F3D693;">投稿者コメント</th>
+      <td><%=@post.comment%></td>
+    </tr>
+  </tbody>
+</table>
+<%# <p>みんなの口コミ</p> %>
+
+<script>
+  $('#star-rate<%= @post.id %>').empty();
+  $('#star-rate<%= @post.id%>').raty({
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf:  '<%= asset_path('star-half.png') %>',
+    half      : true,
+    readOnly: true,
+    score: <%= @post.rate %>,
+  });
+  </script>

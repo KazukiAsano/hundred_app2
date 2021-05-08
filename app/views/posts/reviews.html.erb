@@ -1,0 +1,94 @@
+<hr/>
+<div class="mx-auto text-center my-4">
+  <h4 class="mt-4"><%=@post.name%></h4>
+  <div class="mb-3" style="opacity: 0.5;">
+    <%if @post.user.name?%>
+      投稿者: <%= @post.user.name%>さん
+    <%else%>
+      投稿者: 名無しさん
+    <%end%>
+  </div>
+  <h4>
+    <span id="star-rate<%=@post.id%>" class="mr-2"></span>
+  </h4>
+  <h5>(<%= @reviews.count%>件の口コミ)</h5>
+</div>
+<hr/>
+<div class="container-fluid mx-auto mt-3 mb-5">
+  <div class="row">
+    <%= render partial: 'post_button', locals: { head:"投稿", path: post_path}%>
+    <%= render partial: 'post_button', locals: { head:"口コミ", path: reviews_post_path}%>
+    <%= render partial: 'post_button', locals: { head:"レビュー閲覧に戻る", path: posts_path}%>
+  </div>
+</div>
+<script>
+  $('#star-rate<%= @post.id %>').empty();
+  $('#star-rate<%= @post.id%>').raty({
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf:  '<%= asset_path('star-half.png') %>',
+    half      : true,
+    readOnly: true,
+    score: <%= @post.reviews.average(:rate).to_f.round(1) %>,
+  });
+</script>
+
+<%if @reviews.exists?%>
+  <% @reviews.each do |review|%>
+    <div class="card mx-auto mb-3 px-5 py-3" style="max-width: 70%;" >
+      <div class="row" >
+        <div class="col-3">
+          <%= image_tag review.user.user_image.url, class:"ml-2 mypage_user_icon2"%>
+        </div>
+        <div class="col-6">
+          <h4>
+            <%if review.user.name?%>
+              <%= review.user.name%>
+            <%else%>
+              名無し
+            <%end%>
+          </h4>
+          <%# 購入店舗：ダイソー小平店 %>
+          <%= review.shop_name%>
+        </div>
+      </div>
+      <%if review.user_id==current_user.id%>
+        <div class="mt-2">
+          <%=link_to "編集", edit_review_path(review),class:"mr-3"%>
+          <%=link_to "削除", post_reviews_path(post_id:review.post_id), method: :delete, data: { confirm: '削除してよろしいですか?' }%>
+        </div>
+      <%end%>
+      <hr/>
+      <div class="mb-2">
+      <span id="star-rate<%=review.id%>" class="mr-2"></span>
+      <span class="align-middle" style="font-size: 1.3rem;"><%=review.rate%></span>
+    </div>
+    <hr/>
+    <h4><%=review.title%></h4>
+    <%=review.comment%>
+    <p class="text-right"><%= review.created_at.strftime('%Y/%m/%d')%></p>
+      <%# <div class="pull-right">
+      <% if comment.user_id == current_user&.id %>
+        <%# <%= link_to '編集', edit_house_comment_path(house_id: params[:house_id],id:comment.id),class:"text-right"%>
+        <%# <%= link_to '削除', house_comment_path(house_id: params[:house_id],id:comment.id),method: :delete, data: { confirm: "削除しますか?" },class:"text-right" %>
+      <%# <% end %>
+      <%# </div>
+    </li>   %>
+  <script>
+    $('#star-rate<%= review.id %>').empty();
+    $('#star-rate<%= review.id%>').raty({
+      size     : 36,
+      starOff:  '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+      starHalf:  '<%= asset_path('star-half.png') %>',
+      half      : true,
+      readOnly: true,
+      score: <%= review.rate %>,
+    });
+  </script>
+  </div>
+  <%end%>
+<%else%>
+  <h2>口コミがまだありません</h2>
+<%end%>
