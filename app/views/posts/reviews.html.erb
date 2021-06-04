@@ -9,8 +9,9 @@
     <%end%>
   </div>
   <h4>
-    <span id="star-rate<%=@post.id%>" class="mr-2"></span>
+    <span id="rate<%=@post.id%>" class="mr-2"></span>
   </h4>
+  <h4><%= @post.reviews.average(:rate) %></h4>
   <h5>(<%= @reviews.count%>件の口コミ)</h5>
 </div>
 <hr/>
@@ -22,8 +23,8 @@
   </div>
 </div>
 <script>
-  $('#star-rate<%= @post.id %>').empty();
-  $('#star-rate<%= @post.id%>').raty({
+  $('#rate<%= @post.id %>').empty();
+  $('#rate<%= @post.id%>').raty({
     size     : 36,
     starOff:  '<%= asset_path('star-off.png') %>',
     starOn : '<%= asset_path('star-on.png') %>',
@@ -33,13 +34,16 @@
     score: <%= @post.reviews.average(:rate).to_f.round(1) %>,
   });
 </script>
-
+<%# <%binding.pry %> 
+<div class="card_container">
 <%if @reviews.exists?%>
   <% @reviews.each do |review|%>
-    <div class="card mx-auto mb-3 px-5 py-3" style="max-width: 70%;" >
+    <div class="card mb-3 px-5 py-3">
       <div class="row" >
-        <div class="col-3">
-          <%= image_tag review.user.user_image.url, class:"ml-2 mypage_user_icon2"%>
+        
+          <%= image_tag review.user.user_image.url, class:"ml-2 reviewer_icon"%>
+        
+        <div class="col-2">
         </div>
         <div class="col-6">
           <h4>
@@ -49,7 +53,6 @@
               名無し
             <%end%>
           </h4>
-          <%# 購入店舗：ダイソー小平店 %>
           <%= review.shop_name%>
         </div>
       </div>
@@ -61,34 +64,28 @@
       <%end%>
       <hr/>
       <div class="mb-2">
-      <span id="star-rate<%=review.id%>" class="mr-2"></span>
-      <span class="align-middle" style="font-size: 1.3rem;"><%=review.rate%></span>
+        <span id="star-rate<%=review.id%>" class="mr-2"></span>
+        <span class="align-middle" style="font-size: 1.3rem;"><%=review.rate%></span>
+      </div>
+      <hr/>
+      <h4><%=review.title%></h4>
+      <%=review.comment%>
+      <p class="text-right"><%= review.created_at.strftime('%Y/%m/%d')%></p>
+      <script>
+        $('#star-rate<%= review.id %>').empty();
+        $('#star-rate<%= review.id%>').raty({
+          size     : 36,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf:  '<%= asset_path('star-half.png') %>',
+          half      : true,
+          readOnly: true,
+          score: <%= review.rate %>,
+        });
+      </script>
     </div>
-    <hr/>
-    <h4><%=review.title%></h4>
-    <%=review.comment%>
-    <p class="text-right"><%= review.created_at.strftime('%Y/%m/%d')%></p>
-      <%# <div class="pull-right">
-      <% if comment.user_id == current_user&.id %>
-        <%# <%= link_to '編集', edit_house_comment_path(house_id: params[:house_id],id:comment.id),class:"text-right"%>
-        <%# <%= link_to '削除', house_comment_path(house_id: params[:house_id],id:comment.id),method: :delete, data: { confirm: "削除しますか?" },class:"text-right" %>
-      <%# <% end %>
-      <%# </div>
-    </li>   %>
-  <script>
-    $('#star-rate<%= review.id %>').empty();
-    $('#star-rate<%= review.id%>').raty({
-      size     : 36,
-      starOff:  '<%= asset_path('star-off.png') %>',
-      starOn : '<%= asset_path('star-on.png') %>',
-      starHalf:  '<%= asset_path('star-half.png') %>',
-      half      : true,
-      readOnly: true,
-      score: <%= review.rate %>,
-    });
-  </script>
-  </div>
   <%end%>
 <%else%>
   <h2>口コミがまだありません</h2>
 <%end%>
+</div>

@@ -1,10 +1,11 @@
+<div class="card_container">
 <% @posts.each do |post|%>
-  <div class="mx-auto mt-3 mb-3" style="width: 80%; border: 1px solid #dadce0; border-top: none; border-bottom: none; border-radius: 0.3rem;">
+  <div class="mx-auto mt-3 mb-3" style="border: 1px solid #dadce0; border-top: none; border-bottom: none; border-radius: 0.3rem;">
     <%= link_to post do%>
       <div style="height: 5px; background-color: #F3D693; border-radius: 0.3rem 0.3rem 0 0;"></div>
       <div class="row py-3 px-3">
         <%= image_tag post.image.url, class:"ml-4 col-5", style:"height: 200px; object-fit: cover;"%>
-        <div class="col-6 text-dark ml-4">
+        <div class="col-6 text-dark ml-3">
           <div style="display: inline; border:1px solid; padding: 0.2rem;"><%=post.genre%></div>
           <h4 class="my-2"><%= post.name%></h4>
           <div class="mb-2"><span id="star-rate<%= post.id%>" class="mr-2"></span><span class="align-middle" style="font-size: 1.3rem;"><%= post.rate%></span></div>
@@ -39,3 +40,4 @@
   });
   </script>
 <%end%>
+</div>

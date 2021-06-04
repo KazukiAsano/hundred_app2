@@ -1,3 +1,63 @@
 // Place all the styles related to the homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.top_container {
+  height: 20rem;
+  background-image: url('publicdomainq-0039904qey.jpg');
+  h2 {
+  line-height: 3.5rem;
+  }
+}
+
+.top_container_text {
+  text-shadow: 2px  2px 10px #777 ,-2px  2px 10px #777 ,2px -2px 10px #777 , -2px -2px 10px #777;
+  color: #FFF;
+}
+
+.explanation_area {
+  background-color: #F2F2F2;
+  padding: 3.5rem 0;
+  text-align: center;
+
+  .title {
+     font-weight:700;
+  }
+}
+
+.usage_icon {
+  border-right: 1px solid black;
+}
+
+.usage_message {
+  margin: .5rem 0;
+}
+
+.usage_area {
+  .row {
+      height: 110px;
+  }
+}
+#usage_title {
+  text-align: center;
+}
+
+.usage_icon {
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 785px) {
+  .usage_area {
+    padding: 0;
+    
+    .container {
+        padding: 0;
+    }
+    .row {
+        height: 130px;
+    }
+  }
+}

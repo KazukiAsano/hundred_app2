@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  
   def index
     @posts=Post.all
   end
@@ -49,6 +50,7 @@ class PostsController < ApplicationController
     @ranks=Post.find(Review.group(:post_id).order('avg(rate) desc').pluck(:post_id))
     # @ranks=Post.find(Review.group(:post_id).order('average_rate desc').average(:rate).pluck(:post_id))
     # score: <%= @post.reviews.average(:rate).to_f.round(1) %>
+    
   end
 
   private 

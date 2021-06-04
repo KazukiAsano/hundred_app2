@@ -1,0 +1,6 @@
+id,email,password,name,user_image,favoshop
+1,user1@example.com,aaaaaa,user1,publicdomainq-0045163.jpeg,ダイソー
+2,user2@example.com,bbbbbb,user2,publicdomainq-0054905.jpeg,キャンドゥ
+3,user3@example.com,cccccc,user3,publicdomainq-0054907.jpeg,セリア
+4,user4@example.com,dddddd,user4,publicdomainq-0054929.jpeg,
+5,user5@example.com,eeeeee,user5,,

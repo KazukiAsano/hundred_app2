@@ -1,7 +1,7 @@
 class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -45,4 +45,17 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+  # file = File.extname("public/images/#{row['user_image']}") if original_filename.present?
+  
+  process convert: 'png'
+
+  def filename
+    if original_filename.present?
+      if File.extname(original_filename) == ".HEIC"
+        super.chomp(File.extname(super)) + '.png'
+      else
+        original_filename
+      end
+    end
+  end
 end

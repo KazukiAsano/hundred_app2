@@ -1,68 +1,37 @@
-<div class="card mx-auto my-5 " style="max-width: 80%;">
-  <div class="card-body">
-    <div class="row mx-2 ml-4">
-      <%= image_tag @user.user_image.url, class:"mypage_user_icon ml-1"%>
-      <div class="col-9 ml-5">
-        <h3 class="card-title">
-          <% if @user.name? %>
-            <%= @user.name%>さんのマイページ
-          <% else %>
-            名無しさんのマイページ
-          <% end %>
-        </h3>
-        <hr class="mb-2">
-        <p class="mb-1 m-0">よく利用する100円ショップ</p>
-        <p>
-          <% if @user.favoshop? %>
-            <%=@user.favoshop%>
-          <% else %>
-            なし
-          <% end %>
-        </p>
-      </div>
-    </div>
-    <div class="container-fluid mx-auto mt-3">
-      <div class="row">
-        <%= render partial: 'user_button', locals: { head:"投稿一覧", path: posts_user_path}%>
-        <%= render partial: 'user_button', locals: { head:"買い物リスト", path: shoppings_user_path}%>
-        <%= render partial: 'user_button', locals: { head:"レビューした投稿", path: reviews_user_path}%>
-        <%= render partial: 'user_button', locals: { head:"アカウント編集", path: edit_user_registration_path}%>
-      </div>
-    </div>
-  </div>
-</div>
-
-<% @posts.each do |post|%>
-  <div class="mx-auto mt-3 mb-3" style="width: 80%; border: 1px solid #dadce0; border-bottom: none; border-radius: 0.3rem;">
-    <%= link_to post do%>
-      <div style="height: 5px; background-color: #6495ed; border-radius: 0.3rem 0.3rem 0 0;"></div>
-      <div class="row py-3 px-3">
-        <%= image_tag post.image.url, class:"ml-4 col-5", style:"height:200px; object-fit: cover;"%>
-        <div class="col-6 text-dark ml-3">
-          <div style="display: inline; border:1px solid; padding: 0.2rem;"><%=post.genre%></div>
-          <h4 class="my-2"><%= post.name%></h4>
-          <div class="mb-2"><span id="star-rate<%= post.id%>" class="mr-2"></span><span class="align-middle" style="font-size: 1.3rem;"><%= post.rate%></span></div>
-          <div class="post_index_icon">
-            <span class="mr-2"><i class="fas fa-shopping-cart"></i>件</span>
-            <span class="ml-3"><i class="fas fa-comments"></i>件</span>
+<%= render 'user_info'%>
+<div class="card_container">
+  <% @posts.each do |post|%>
+    <div class="mt-3 mb-3" style="border: 1px solid #dadce0; border-bottom: none; border-radius: 0.3rem;">
+      <%= link_to post do%>
+        <div style="height: 5px; background-color: #6495ed; border-radius: 0.3rem 0.3rem 0 0;"></div>
+        <div class="row py-3 px-3">
+          <%= image_tag post.image.url, class:"ml-4 col-5", style:"height:200px; object-fit: cover;"%>
+          <div class="col-6 text-dark ml-3">
+            <div style="display: inline; border:1px solid; padding: 0.2rem;"><%=post.genre%></div>
+            <h4 class="my-2"><%= post.name%></h4>
+            <div class="mb-2"><span id="star-rate<%= post.id%>" class="mr-2"></span><span class="align-middle" style="font-size: 1.3rem;"><%= post.rate%></span></div>
+            <div class="post_index_icon">
+              <span class="mr-2"><i class="fas fa-shopping-cart mr-2"></i><%=post.shoppings.count%>件</span>
+              <span class="ml-3"><i class="fas fa-comments mr-2"></i><%=post.reviews.count%>件</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div style="height: 5px; background-color: #6495ed; border-radius: 0 0 0.3rem 0.3rem;"></div>
-    <%end%>
-  </div>
+        <div style="height: 5px; background-color: #6495ed; border-radius: 0 0 0.3rem 0.3rem;"></div>
+      <%end%>
+    </div>
 
-  <!-- 評価javascript -->
-  <script>
-  $('#star-rate<%= post.id %>').empty();
-  $('#star-rate<%= post.id%>').raty({
-    size     : 36,
-    starOff:  '<%= asset_path('star-off.png') %>',
-    starOn : '<%= asset_path('star-on.png') %>',
-    starHalf:  '<%= asset_path('star-half.png') %>',
-    half      : true,
-    readOnly: true,
-    score: <%= post.rate %>,
-  });
-  </script>
-<%end%>
+    <!-- 評価javascript -->
+    <script>
+    $('#star-rate<%= post.id %>').empty();
+    $('#star-rate<%= post.id%>').raty({
+      size     : 36,
+      starOff:  '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+      starHalf:  '<%= asset_path('star-half.png') %>',
+      half      : true,
+      readOnly: true,
+      score: <%= post.rate %>,
+    });
+    </script>
+  <%end%>
+</div>

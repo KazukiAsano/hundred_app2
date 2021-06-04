@@ -1,0 +1,36 @@
+<div class="card my-5">
+  <div class="card-body">
+    <div class="row mx-2 ml-4">
+      <%= image_tag @user.user_image.url, class:"mypage_user_icon ml-1"%>
+      <div class="col-2">
+      </div>
+      <div class="col-6">
+        <h3 class="card-title">
+          <% if @user.name? %>
+            <%= @user.name%>さんのマイページ
+          <% else %>
+            名無しさんのマイページ
+          <% end %>
+        </h3>
+        <hr class="mb-2">
+        <p class="mb-1 m-0">よく利用する100円ショップ</p>
+        <p>
+          <% if @user.favoshop? %>
+            <%=@user.favoshop%>
+          <% else %>
+            なし
+          <% end %>
+        </p>
+      </div>
+    </div>
+    <div class="container-fluid mx-auto mt-3">
+      <div class="row">
+        <%= render partial: 'user_button', locals: { head:"投稿一覧", path: posts_user_path}%>
+        <%= render partial: 'user_button', locals: { head:"買い物リスト", path: shoppings_user_path}%>
+        <%= render partial: 'user_button', locals: { head:"レビューした投稿", path: reviews_user_path}%>
+        <%= render partial: 'user_button', locals: { head:"アカウント編集", path: edit_user_registration_path}%>
+      </div>
+    </div>
+  </div>
+</div>
+

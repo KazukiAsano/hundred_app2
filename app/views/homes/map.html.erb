@@ -1,4 +1,87 @@
-<%@shop_list.each do |name|%>
+<div class="row">
+  <div class="col-8">
+    <h3 class="text-center mb-3">ショップ検索</h3>
+    <div class="text-center mb-4">
+      <input id="address" type="text" size="30" placeholder="ショップ名を入力してください。">
+      <input type="button" value="検索" onclick="codeAddress()">
+      <div class="mt-2" id="display"></div>
+    </div>
+    <div id='map'></div>
+  </div>
+  <div class="col-3">
+    <p class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      ショップリスト
+    </p>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <p style="opacity: 0.5;">(クリックでコピーされます)</p>
 
-<%=name%> ,&emsp;
-<%end%>
+      <%@shop_list.each do |name|%>
+          <p class="copy_btn dropdown-item" data-clipboard-text="<%=name%>"><%=name%></p>
+      <%end%>
+    </div>
+  </div>
+</div>
+<style>
+#map {
+  margin: 0 auto;
+  height: 500px;
+  width: 500px;
+}
+</style>
+
+<script>
+let map
+
+let geocoder
+// 下の1行を追加 
+const display = document.getElementById('display')
+
+function initMap(){
+  geocoder = new google.maps.Geocoder()
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 35.731005, lng:139.452995},
+    zoom: 18,
+  });
+
+  marker = new google.maps.Marker({
+    position:  {lat: 35.731005, lng:139.452995},
+    map: map
+  });
+}
+
+function codeAddress(){
+  let inputAddress = document.getElementById('address').value;
+
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+
+      display.textContent = "住所：" + results[ 0 ].formatted_address.replace(/^日本、/, '');
+    } else {
+      alert('該当する結果がありませんでした：' + status);
+    }
+  });   
+}
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=Rails.application.credentials[:google_api_key]%>&callback=initMap" async defer></script>
+
+<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.13/clipboard.min.js"></script>
+ 
+<script>
+var clipboard = new Clipboard('.copy_btn');    //clipboard.min.jsが動作する要素をクラス名で指定
+ 
+//クリックしたときの挙動
+// $(function(){
+//     $('.copy_btn').click(function(){
+        // $(this).addClass('copied');    //ボタンの色などを変更するためにクラスを追加
+        // $(this).text('コピーしました');    //テキストの書き換え
+//     });
+// });
+</script>
