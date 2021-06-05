@@ -81,5 +81,6 @@ test:
 production:
   <<: *default
   database: hundred_app2_production
-  username: hundred_app2
-  password: <%= ENV['HUNDRED_APP2_DATABASE_PASSWORD'] %>
+  username: postgres
+  password: <%= Rails.application.credentials.db[:password] %>
+  host: <%= Rails.application.credentials.db[:hostname] %>
