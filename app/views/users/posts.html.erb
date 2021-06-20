@@ -5,7 +5,7 @@
       <%= link_to post do%>
         <div style="height: 5px; background-color: #6495ed; border-radius: 0.3rem 0.3rem 0 0;"></div>
         <div class="row py-3 px-3">
-          <%= image_tag post.image.url, class:"ml-4 col-5", style:"height:200px; object-fit: cover;"%>
+          <%= image_tag post.image.url, class:"col-5", style:"height:200px; object-fit: cover;"%>
           <div class="col-6 text-dark ml-3">
             <div style="display: inline; border:1px solid; padding: 0.2rem;"><%=post.genre%></div>
             <h4 class="my-2"><%= post.name%></h4>
