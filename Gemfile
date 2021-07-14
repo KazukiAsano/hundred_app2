@@ -18,6 +18,8 @@ gem 'mini_magick'
 
 gem "mimemagic", "~> 0.3.6"
 
+gem 'kaminari'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '< 6.1.0'
 # Use postgresql as the database for Active Record
