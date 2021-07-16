@@ -53,15 +53,17 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
   # file = File.extname("public/images/#{row['user_image']}") if original_filename.present?
   
-  process convert: 'png'
+  # aws環境時実装出来ていない為、保留>>
+  # process convert: 'png'
 
-  def filename
-    if original_filename.present?
-      if File.extname(original_filename) == ".HEIC"
-        super.chomp(File.extname(super)) + '.png'
-      else
-        original_filename
-      end
-    end
-  end
+  # def filename
+  #   if original_filename.present?
+  #     if File.extname(original_filename) == ".HEIC"
+  #       super.chomp(File.extname(super)) + '.png'
+  #     else
+  #       original_filename
+  #     end
+  #   end
+  # end
+  # <<ここまで
 end
