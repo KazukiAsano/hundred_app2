@@ -7,6 +7,5 @@ if Rails.env.production?
       region: "ap-northeast-1"
     }
     config.fog_directory = "hundred-app2"
-    config.asset_host = "https://static.hundred-100.net"
   end
 end
