@@ -1,4 +1,11 @@
 <div class="card_container">
+<%= search_form_for @q do |f| %>
+  
+  <%# <i class="fas fa-search mr-1"></i> %>
+  <%# <%= f.label :name_cont, "商品をさがす" %>
+  <%= f.text_field :name_cont ,placeholder:"\uf002 商品をさがす",class:"fa form-control",style:"border: 2px solid gray;"%>
+  
+<% end %>
 <% @posts.each do |post|%>
   <div class="mx-auto mt-3 mb-3" style="border: 1px solid #dadce0; border-top: none; border-bottom: none; border-radius: 0.3rem;">
     <%= link_to post do%>
