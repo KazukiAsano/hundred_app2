@@ -34,11 +34,11 @@
     score: <%= @post.reviews.average(:rate).to_f.round(1) %>,
   });
 </script>
-<%# <%binding.pry %> 
+
 <div class="card_container">
 <%if @reviews.exists?%>
   <% @reviews.each do |review|%>
-    <div class="card mb-3 px-5 py-3">
+    <div class="card mb-3 px-4 py-3">
       <div class="row" >
         
           <%= image_tag review.user.user_image.url, class:"ml-2 reviewer_icon"%>

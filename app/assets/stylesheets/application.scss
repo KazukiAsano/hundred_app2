@@ -118,14 +118,14 @@
 }
 
 .shopping_in_button {
-    width: 70%;
+    width: 100%;
     color: white;
     background-color: #f78f07;
     box-shadow: 0 4px #f75f07;
   }
   
   .shopping_out_button {
-    width: 70%;
+    width: 100%;
     background-color: none;
     border-color : #f78f07;
     color: #f78f07;
@@ -133,31 +133,32 @@
   }
 
   .comment_button {
-    width: 70%;
+    width: 100%;
     color: white;
     background-color: #55C500;
     box-shadow: 0 4px #00c542;
   }
   
   .comment_done {
-    width: 70%;
+    width: 100%;
     background-color: none;
     border-color : #55C500;
     color: #55C500;
     border: solid 1px;
     border-radius: 0.25rem;
     padding: 0.375rem 0.75rem;
+    text-align: center;
   }
   
   .post_edit_button {
-    width: 70%;
+    // width: 70%;
     color: white;
     background-color: #ffea00;
     box-shadow: 0 4px #b8a800;
   }
   
   .post_delete_button {
-    width: 70%;
+    // width: 70%;
     color: white;
     background-color: #FF6969;
     box-shadow: 0 4px #e61e1e;

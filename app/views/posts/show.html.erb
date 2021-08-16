@@ -21,34 +21,34 @@
       <%end%>
     </div>
   </div>
-  <div class="col-4 text-center">
-    <%= render 'shoppings/shopping' %>
+  </div>
+  <div class="container-fluid mx-auto mt-3">
+  <div class="row">
+    <div class="col-4 px-0">
+      <%= render 'shoppings/shopping' %>
+    </div>
     <%if @post.user_id!=current_user.id%>
       <%if Review.exists?(user: current_user, post_id: @post.id)%>
-        <div class="comment_done mt-4 mx-auto">
+        <div class="comment_done col-4">
           <i class="fas fa-comments mr-1"></i>口コミ投稿済
         </div>
       <%else%>
-        <%= link_to new_post_reviews_path(@post) do%>
-          <div class="btn comment_button text-decoration-none mt-4">
+        <%= link_to new_post_reviews_path(@post),class: "col-4 px-0" do %>
+          <div class="btn comment_button text-decoration-none">
             <i class="fas fa-comments mr-1"></i>口コミ投稿
           </div>
         <%end%>
       <%end%>
     <%end%>
     <%if @post.user_id==current_user.id%>
-      <%= link_to edit_post_path(@post) do%>
-        <div class="btn post_edit_button mt-4">
-            投稿編集
-        </div>
+      <%= link_to edit_post_path(@post),class: "btn post_edit_button col-4" do%>
+          投稿編集
       <%end%>
-      <%= link_to post_path(@post), method: :delete, data: { confirm: '削除してよろしいですか?' } do%>
-        <div class="btn post_delete_button mt-4">
-          投稿削除
-        </div>
+      <%= link_to post_path(@post), method: :delete, data: { confirm: '削除してよろしいですか?' } ,class: "btn post_delete_button col-4" do%>
+        投稿削除
       <%end%>
     <%end%>
-  </div>
+</div>
 </div>
 <hr/>
 <div class="container-fluid mx-auto mt-3">

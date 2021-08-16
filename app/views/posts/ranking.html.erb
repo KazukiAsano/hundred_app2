@@ -5,7 +5,7 @@
   <% @ranks.each.with_index(1) do |post,i|%>
     <% if post.reviews.average(:rate).to_f.round(1) != last_rate %>
       <% j = i %>
-      <div class="mx-auto my-3" style="border: 1px solid #dadce0; border-radius: 0.3rem;">
+      <div class="mx-auto my-3" style="border: 3px solid gray; border-radius: 0.3rem;">
         <%= link_to post do%>
           <div class="row px-3">
             <div class="col-1 border-right py-5 text-dark rank_num" style="writing-mode: vertical-rl; text-orientation: upright;">
@@ -34,7 +34,7 @@
     <%# <% elsif i == 1 %>
       <%# <% last_rate = post.reviews.average(:rate).to_f.round(1) %> 
     <% else %>
-      <div class="mx-auto my-3" style="border: 1px solid #dadce0; border-radius: 0.3rem;">
+      <div class="mx-auto my-3" style="border: 3px solid gray; border-radius: 0.3rem;">
         <%= link_to post do%>
           <div class="row px-3">
             <div class="col-1 border-right py-5 text-dark rank_num" style="writing-mode: vertical-rl; text-orientation: upright;">

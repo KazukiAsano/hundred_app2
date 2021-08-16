@@ -1,4 +1,4 @@
-<div id="shopping-<%= @post.id %>">
+<div id="shopping-<%= @post.id%>">
     <% if Shopping.exists?(user: current_user, post_id: @post.id) %>
       <%= link_to "/posts/#{@post.id}/shoppings", class: "btn shopping_out_button", method: :delete, remote: true do %>
         <div><i class="fas fa-arrow-alt-circle-left mr-1"></i>カゴから出す</div>
