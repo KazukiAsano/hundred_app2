@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
   
   def index
-    @posts=Post.all.page(params[:page]).per(4)
+    @q = Post.ransack(params[:q])
+    @posts=@q.result.page(params[:page]).per(4)
   end
 
   def show
