@@ -4,7 +4,7 @@
 
 <img width="700" alt="スクリーンショット 2021-09-23 18 21 59" src="https://user-images.githubusercontent.com/62829301/134483399-0bbec630-6551-47b2-bd95-86c0024e884e.png">
 
-下記ページで公開中です。
+下記ページで公開中です。　　
 
 https://hundred-100.net
 
@@ -52,4 +52,5 @@ Qiitaにて機能解説などを執筆しています。
 ## 設計資料
 [ER図](https://user-images.githubusercontent.com/62829301/134493479-00c6e1c5-51bc-4d69-abd2-bea999c9aeae.png)  
 
-インフラ構成図
+[インフラ構成図](https://user-images.githubusercontent.com/62829301/134840924-c67dd81c-22e4-4121-b71d-b302a8803ff4.png)
+
