@@ -48,6 +48,7 @@ Qiitaにて機能解説などを執筆しています。
 |  14  |  レスポンシブデザイン　　 |
 |  15  |  サンプルムービー  |
 |  16  |  ランキング  |
+|  17  |  管理者画面  |
 
 ## 設計資料
 [ER図](https://user-images.githubusercontent.com/62829301/134493479-00c6e1c5-51bc-4d69-abd2-bea999c9aeae.png)  
