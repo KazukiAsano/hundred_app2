@@ -27,7 +27,7 @@ Qiitaにて機能解説などを執筆しています。
 - HTML
 - CSS
 - Bootstrap
-- AWS(VPC,RDS,EC2,S3,CloudFlont,ALB,ACM)
+- AWS(VPC,RDS,EC2,S3,CloudFront,ALB,ACM)
 
 ## 機能一覧
 |    |  機能  |
