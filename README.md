@@ -53,5 +53,6 @@ Qiitaにて機能解説などを執筆しています。
 ## 設計資料
 [ER図](https://user-images.githubusercontent.com/62829301/134493479-00c6e1c5-51bc-4d69-abd2-bea999c9aeae.png)  
 
-[インフラ構成図](https://user-images.githubusercontent.com/62829301/134840924-c67dd81c-22e4-4121-b71d-b302a8803ff4.png)
+[インフラ構成図](https://user-images.githubusercontent.com/62829301/135631386-67cbb5ef-2f22-403d-a89a-9e200333d422.png)
+
 
