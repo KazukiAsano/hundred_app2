@@ -1,8 +1,5 @@
 # ¥100!!!  〜one hundred〜
-
-<img width="700" alt="スクリーンショット 2021-09-23 18 14 51" src="https://user-images.githubusercontent.com/62829301/134482530-baef7c4f-3298-4c88-af64-9cd122a4a56b.png">
-
-<img width="700" alt="スクリーンショット 2021-09-23 18 21 59" src="https://user-images.githubusercontent.com/62829301/134483399-0bbec630-6551-47b2-bd95-86c0024e884e.png">
+![hundredapp2_top](https://user-images.githubusercontent.com/62829301/136205579-e666ecdd-c2b6-47fa-8390-22d425e093f7.gif)
 
 下記ページで公開中です。　　
 
